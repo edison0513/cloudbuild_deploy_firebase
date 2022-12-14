@@ -1,0 +1,13 @@
+steps:
+- name: node
+  entrypoint: npm
+  args: ['install']
+- name: node
+  entrypoint: npm
+  args: ['run', 'build:stage']
+- name: bash
+  args: ['mkdir', '-p', 'public']
+- name: bash
+  args: ['mv', './dist', 'public/invite']
+- name: gcr.io/$PROJECT_ID/firebase
+  args: ['deploy', '--project=$PROJECT_ID']
